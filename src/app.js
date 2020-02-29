@@ -19,56 +19,68 @@ const PLAYERS = [
     "Slayer",
     "Vader",
     "Slingo"
-  ];
-  ​
-  // initialize players with image and strength
-  const initPlayers = players => {
-    let detailedPlayers = [];
+];
+let detailedPlayers = [];
+
+// initialize players with image and strength
+const initPlayers = players => {
+    for (var i = 0; i < PLAYERS.length; i++) {
+        var players = {
+            name: PLAYER[i],
+            strength: getRandomStrength(),
+            image: "./images/super-" + (i + 1) + ".png",
+            type: "hero|villan"
+        };
+        detailedPlayer.push(players);
+        console.log(detailedplayers);
+    }
     // Create players using for loop
     // Type your code here
-    for (let i = 0; i < players.length; i++) {
-      detailedPlayers[i] = {
-        name: players[i],
-        type: i % 2 == 0 ? "hero" : "villain",
-        image: "images/super-" + (i + 1) + ".png",
-        strength: getRandomStrength()
-      };
-    }
-    //Can you see the chyeanges? yes sir there is problem in strength
-    return detailedPlayers;
-  };
-  ​
-  // getting random strength
-  const getRandomStrength = () => {
+
+    // Where is villain? One image goes to hero and other image goes as villain?
+    //Use a ternary operator to push even numbers to hero and odd numbers to hero
+
+    // player = i % 2 == 0 ? 'true' : 'false';
+};
+return detailedPlayers;
+
+// getting random strength
+//https://www.w3schools.com/jsref/jsref_random.asp - check this to generate random numbers
+
+const getRandomStrength = () => {
     // Return a random integer (0,100]
-    // Note: You can use Math.random() and
-    return Math.ceil(Math.random() * 100);
-  };
-  ​
-  const buildPlayers = (players, type) => {
-    let fragment = "";
-  ​
+    // Note: You can use Math.randm() and Math.ceil()
+    let random = Math.floor(Math.random() * 10 + 1);
+    return random;
+};
+
+const buildPlayers = (players, type) => {
     // Loop through players and accumulate HTML template
     // depending of type of player(hero|villain)
     // Type your code here
-    for (let i = 1; i <= 20; i++) {
-      fragment = `<div class="player">
-      <img src="${players[i].image}">
-      <div class="name">${players[i].name}</div>
-      <div class="strength">${players[i].strength}</div>
-      </div>`;
+    var fragment = "";
+    for (var i = 0; i < PLAYERS.length; i++) {
+        fragment = `
+            <div class="player">
+            <img src="${detailedPlayers[i].image}" alt = "characters">
+            <h4> ${detailedPlayers[i].name}</h4>
+            <h1>${detailedPlayers[i].strength}</h1>
+            </div>
+             `;
+
+        //Where did you add the alternate name for the image? (Note: Use alt inside the image tag)
     }
     return fragment;
-  };
-  // Display players in HTML
-  const viewPlayers = players => {
+};
+// Display players in HTML
+const viewPlayers = players => {
     document.getElementById("heroes").innerHTML = buildPlayers(players, "hero");
     document.getElementById("villains").innerHTML = buildPlayers(
-      players,
-      "villain"
+        players,
+        "villain"
     );
-  };
-  ​
-  window.onload = () => {
+};
+
+window.onload = () => {
     viewPlayers(initPlayers(PLAYERS));
-  };
+};
